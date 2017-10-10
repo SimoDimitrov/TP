@@ -7,7 +7,7 @@ protect_from_forgery with: :null_sessions
 def sums
 	CSV.foreach do |row|
 	sum=0;
-	sum += row[0];
+	sum += row[0]
 	sum=sum.ceil
 	render plain: ('%.2f'%sum)
 end
@@ -15,7 +15,7 @@ end
 def filter
 	CSV.foreach do |row|
 	sum=0;
-	sum+erow[1] if row[2]%2!=0;
+	sum+erow[1] if row[2]%2!=0
 	  end
 	end	
 	sum=sum.ceil
@@ -30,13 +30,13 @@ end
     while sdi < file.length-30 do
       i=0
       while i<30
-        sum+=file[sdi+i][0].to_i;
+        sum+=file[sdi+i][0].to_i
         i+=1
       end  
       if sum > result
         result=sum
       end 
-      sum=0;
+      sum=0
       sdi+=1  
    end
    result=result.ceil
@@ -47,13 +47,13 @@ end
   def lin_regressions
 
     file=CSV.parse(params[:file].read)
-    ind=(1..file.length).to_a;
+    ind=(1..file.length).to_a
     values=file.map{|n| n[0].to_i}
-    p values.length;
-    p ind.length;
-    linear = Regression::Linear.new(ind, values);
-    b = linear.intercept;
-    a = linear.slope;
+    p values.length
+    p ind.length
+    linear = Regression::Linear.new(ind, values)
+    b = linear.intercept
+    a = linear.slope
     render plain: "#{'%.6f' % a},#{'%.6f' % b}"
 
  end  
