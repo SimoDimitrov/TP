@@ -42,4 +42,15 @@ def intervals
    render plain: ('%.2f' % result )
 
   end 
+	
+def lin_regressions
+	arr = CSV.parse(params["file"].read, converters: :numeric)
+	x = (1..arr.length).to_a
+	y = arr.map {|row| row[0]}
+	linear = Regression::Linear.new(x, y)
+	a = linear.slope
+	b = linear.intercept
+	render plain: "%.6f" % a + "," + "%.6f" % b
+   end
+	
 end
